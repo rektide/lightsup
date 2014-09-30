@@ -1,0 +1,14 @@
+{
+	"name": "lightsup",
+	"version": "1.0.0",
+	"description": "Light scripts",
+	"main": "lightsup.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "rektide",
+	"license": "ISC",
+	"dependencies": {
+		"openzwave": "^0.0.32"
+	}
+}
