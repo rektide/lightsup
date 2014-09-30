@@ -9,6 +9,7 @@
 	"author": "rektide",
 	"license": "ISC",
 	"dependencies": {
+		"datejs": "^1.0.0-rc1",
 		"openzwave": "^0.0.32"
 	}
 }

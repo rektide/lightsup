@@ -1,8 +1,10 @@
+#!/usr/bin/env node
 /*
  * OpenZWave test program.
  */
 
-var OpenZWave = require('openzwave');
+var OpenZWave = require('openzwave'),
+  DateJs= require('datejs')
 
 var zwave = new OpenZWave('/dev/ttyUSB0', {
 	saveconfig: true,
@@ -124,6 +126,16 @@ zwave.on('scan complete', function() {
 zwave.connect();
 
 module.exports= zwave
+
+if(!module.parent && process.argv.length >= 3){
+	var val= parseInt(process.argv[3]) || 93,
+	  time= Date.parse(process.argv[2]),
+	  wait= time.getTime() - Date.now()
+	console.log("Waiting", wait/1000/60, "m before setting brightness", val)
+	setTimeout(function(){
+		zwave.setLevel(2, val)
+	}, wait)
+}
 
 process.on('SIGINT', function() {
 	console.log('disconnecting...');
