@@ -131,18 +131,18 @@ if(!module.parent && process.argv.length >= 3){
 	var val= parseInt(process.argv[3]),
 	  time= Date.parse(process.argv[2]),
 	  wait= time.getTime() - Date.now(),
-	  nodes= process.argv[4]
+	  targets= process.argv[4]
 	if(val === Number.NaN)
 		val = 95
-	if(nodes)
-		nodes= nodes.split(',').map(function(v){return parseInt(v)})
+	if(targets)
+		targets= targets.split(',').map(function(v){return parseInt(v)})
 	else
-		nodes= [2]
+		targets= [2]
 	console.log("Waiting", wait/1000/60, "m before setting brightness", val)
 	setTimeout(function(){
-		console.log('setting',nodes,'to',val)
-		for(var i in nodes){
-			zwave.setLevel(nodes[i], val)
+		console.log('setting',targets,'to',val)
+		for(var i in targets){
+			zwave.setLevel(targets[i], val)
 		}
 	}, wait)
 }
