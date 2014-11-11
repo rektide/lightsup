@@ -128,12 +128,22 @@ zwave.connect();
 module.exports= zwave
 
 if(!module.parent && process.argv.length >= 3){
-	var val= parseInt(process.argv[3]) || 93,
+	var val= parseInt(process.argv[3]),
 	  time= Date.parse(process.argv[2]),
-	  wait= time.getTime() - Date.now()
+	  wait= time.getTime() - Date.now(),
+	  nodes= process.argv[4]
+	if(val === Number.NaN)
+		val = 95
+	if(nodes)
+		nodes= nodes.split(',').map(function(v){return parseInt(v)})
+	else
+		nodes= [2]
 	console.log("Waiting", wait/1000/60, "m before setting brightness", val)
 	setTimeout(function(){
-		zwave.setLevel(2, val)
+		console.log('setting',nodes,'to',val)
+		for(var i in nodes){
+			zwave.setLevel(nodes[i], val)
+		}
 	}, wait)
 }
 
